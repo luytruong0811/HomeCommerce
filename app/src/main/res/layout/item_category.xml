@@ -11,8 +11,8 @@
         android:id="@+id/ivCategory"
         android:layout_gravity="center"
         android:src="@drawable/shirt"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:contentDescription="@string/todo"/>
     <TextView
         android:textColor="@color/nameProduct"
@@ -21,7 +21,7 @@
         android:text="@string/ao"
         android:textSize="10sp"
         android:gravity="center"
-        android:fontFamily="@font/lexend_medium"
+        android:fontFamily="@font/lexend_regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="SmallSp" />

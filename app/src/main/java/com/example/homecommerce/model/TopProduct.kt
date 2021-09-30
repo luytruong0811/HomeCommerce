@@ -23,5 +23,7 @@ data class TopProduct(
     @SerializedName("sold")
     val sold: Int,
     @SerializedName("variants")
-    val variants: List<VariantX>
+    val variants: List<VariantX>,
+    @SerializedName("discount_percent")
+    val discount_percent: Int
 )

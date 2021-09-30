@@ -1,5 +1,6 @@
 package com.example.homebidu.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ class SuggestProductAdapter : RecyclerView.Adapter<SuggestProductAdapter.ItemSug
     }
 
     class ItemSuggestProduct(view: View) : RecyclerView.ViewHolder(view){
+        @SuppressLint("SetTextI18n")
         fun bind(data: SuggestProduct){
             itemView.apply {
                 Glide.with(ivSuggestProduct)
@@ -40,7 +42,13 @@ class SuggestProductAdapter : RecyclerView.Adapter<SuggestProductAdapter.ItemSug
                     tvCountrySuggest.text = "Mỹ"
                 }
 
-                tvSoldSuggest.text = "Đã bán: ${data.sold}"
+                tvSoldSuggest.text = "Đã bán "+data.sold
+
+                if(data.discountPercent==0) {
+                    tvDisCountSuggest.visibility = View.GONE
+                } else {
+                    tvDisCountSuggest.text = data.discountPercent.toString()+"%"
+                }
 
             }
         }

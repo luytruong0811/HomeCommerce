@@ -20,4 +20,8 @@ data class NewestProduct(
     @SerializedName("shop")
     val shop: Shop,
     @SerializedName("shop_id")
-    val shopId: String)
+    val shopId: String,
+    @SerializedName("discount_percent")
+    val discount_percent: Int,
+    @SerializedName("sold")
+    val  sold: Int)

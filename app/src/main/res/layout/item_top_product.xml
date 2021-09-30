@@ -2,64 +2,120 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:padding="4dp"
+    android:paddingStart="10dp"
     android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:ignore="RtlSymmetry">
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/ivTopProduct"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="114dp"
+            android:layout_height="114dp"
             android:background="@drawable/newproduct"
             android:scaleType="centerCrop" />
+
         <ImageView
-            android:layout_marginTop="5.5dp"
-            android:layout_marginStart="120dp"
-            android:src="@drawable/ic_save"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="93dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_save" />
 
         <TextView
             android:id="@+id/tvTopProductCount"
-            android:layout_width="13dp"
-            android:layout_height="17dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="7dp"
-            android:layout_marginTop="123dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/background_black_retange"
+            android:fontFamily="@font/lexend_medium"
             android:gravity="center"
+            android:paddingStart="6dp"
+            android:paddingTop="1dp"
+            android:paddingEnd="6dp"
+            android:paddingBottom="1dp"
             android:text="1"
             android:textColor="@color/white"
             android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvDisCountTopProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_discount"
+            android:text="@string/_20"
+            android:paddingStart="3dp"
+            android:paddingEnd="3dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/lexend_bold"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="94dp"
+            android:visibility="visible"/>
+
     </RelativeLayout>
     <TextView
         android:textColor="@color/nameProduct"
         android:id="@+id/tvNameProduct"
         android:textSize="12sp"
-        android:layout_marginTop="5.75dp"
+        android:layout_marginTop="6dp"
         android:maxLines="2"
-        android:fontFamily="@font/lexend_medium"
+        android:fontFamily="@font/lexend_regular"
         android:lineHeight="15dp"
+        android:text="Hí anh em"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:targetApi="p" />
+        tools:targetApi="p"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:textColor="@color/nameProduct"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="4dp"
         android:id="@+id/tvPriceProduct"
         android:textSize="14sp"
+        android:fontFamily="@font/lexend_bold"
+        android:text="@string/_1_700_000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/ic_location"
+            android:layout_width="7.08dp"
+            android:layout_height="8.33dp"/>
+        <TextView
+            android:textColor="@color/nameProduct"
+            android:id="@+id/tvCountry"
+            android:textSize="10sp"
+            android:text="@string/vi_t_nam"
+            android:fontFamily="@font/lexend_regular"
+            android:layout_gravity="center"
+            android:layout_marginStart="3.75dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="SmallSp" />
+    </LinearLayout>
+
     <TextView
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
         android:id="@+id/tvSold"
         android:textColor="@color/seller"
         android:textSize="10sp"
         android:text="@string/b_n_120"
+        android:fontFamily="@font/lexend_regular"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        tools:ignore="SmallSp" />
 </LinearLayout>

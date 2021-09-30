@@ -25,7 +25,6 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var voucherPagerAdapter: VoucherPagerAdapter
 
     private lateinit var itemCategoryAdapter: ItemCategoryAdapter
-    private lateinit var topLiveStreamAdapter: TopLiveStreamAdapter
     private lateinit var newProductAdapter: NewProductAdapter
     private lateinit var topKeyAdapter: TopKeyAdapter
     private lateinit var topSellerAdapter: TopSellerAdapter
@@ -33,7 +32,6 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var suggestProductAdapter: SuggestProductAdapter
 
     private lateinit var gridLayout: GridLayoutManager
-    private lateinit var layoutManagerBidu: LinearLayoutManager
     private lateinit var layoutManagerNewProduct: LinearLayoutManager
     private lateinit var layoutManagerTopKey: LinearLayoutManager
     private lateinit var layoutManagerTopSeller: LinearLayoutManager
@@ -80,9 +78,6 @@ class HomeActivity : AppCompatActivity() {
                     voucherPagerAdapter.getVoucher(voucherBanner.orEmpty())
                     totalVoucher = voucherBanner!!.size
 
-                    //topLiveStream
-                    topLiveStreamAdapter.setTopLiveStream(t.items.topLivestreams.orEmpty())
-
                     //newProduct
                     newProductAdapter.getNewProduct(t.items.newestProduct.orEmpty())
 
@@ -96,7 +91,6 @@ class HomeActivity : AppCompatActivity() {
                     topProductAdapter.setTopProduct(t.items.topProduct.orEmpty())
 
                     //suggestProduct
-
                     suggestProductAdapter.getSuggestProduct(t.items.suggestProduct.orEmpty())
 
                 }
@@ -124,11 +118,6 @@ class HomeActivity : AppCompatActivity() {
         viewPagerVoucher.adapter = voucherPagerAdapter
         tabLayoutVoucher.setupWithViewPager(viewPagerVoucher, true)
 
-        topLiveStreamAdapter = TopLiveStreamAdapter()
-        layoutManagerBidu = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        rcvBiDuLive.layoutManager = layoutManagerBidu
-        rcvBiDuLive.adapter = topLiveStreamAdapter
-
         newProductAdapter = NewProductAdapter()
         layoutManagerNewProduct = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         rcvNewProduct.layoutManager = layoutManagerNewProduct
@@ -150,7 +139,7 @@ class HomeActivity : AppCompatActivity() {
         rcvTopProduct.adapter = topProductAdapter
 
         suggestProductAdapter = SuggestProductAdapter()
-        layoutManagerSuggestProduct = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        layoutManagerSuggestProduct = GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
         rcvSuggest.layoutManager = layoutManagerSuggestProduct
         rcvSuggest.adapter = suggestProductAdapter
 

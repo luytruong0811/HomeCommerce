@@ -29,7 +29,7 @@ class NewProductAdapter : RecyclerView.Adapter<NewProductAdapter.ItemNewProductV
                     .error(R.mipmap.ic_launcher)
                     .into(ivNewProduct)
                 tvNameNewProduct.text = data.name
-               val decimalFormat =  DecimalFormat("###,###,###")
+                val decimalFormat =  DecimalFormat("###,###,###")
                 tvPriceNewProduct.text = decimalFormat.format(data.beforeSalePrice).plus(" ₫")
                 if (data.shop.country == "KO"){
                     tvCountry.text = "Hàn Quốc"
@@ -37,6 +37,12 @@ class NewProductAdapter : RecyclerView.Adapter<NewProductAdapter.ItemNewProductV
                     tvCountry.text = "Việt Nam"
                 }else{
                     tvCountry.text = "Mỹ"
+                }
+                tvSold.text = "Đã bán "+ data.sold.toString()
+                if(data.discount_percent==0) {
+                    tvDisCount.visibility = View.GONE
+                } else {
+                    tvDisCount.text = data.discount_percent.toString()+"%"
                 }
             }
         }

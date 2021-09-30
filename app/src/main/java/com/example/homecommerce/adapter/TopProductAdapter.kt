@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.homecommerce.R
@@ -37,7 +38,13 @@ class TopProductAdapter : RecyclerView.Adapter<TopProductAdapter.ItemProductVH>(
                 val decimalFormat =  DecimalFormat("###,###,###")
                 tvPriceProduct.text = decimalFormat.format(data.priceMinMax.max).plus(" ₫")
 
-                tvSold.text = "Đã bán: ${data.sold}"
+                tvSold.text = "Đã bán ${data.sold}"
+
+                if(data.discount_percent == 0) {
+                    tvDisCountTopProduct.visibility = View.GONE
+                } else {
+                    tvDisCountTopProduct.text = data.discount_percent.toString()+"%"
+                }
 
             }
         }
