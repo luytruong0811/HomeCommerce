@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">HomeCommerce</string>
+    <string name="new_product">Sản phẩm mới nhất</string>
+    <string name="view_more">Xem thêm</string>
+    <string name="top_find">Top Tìm Kiếm</string>
+    <string name="top_seller">Top Người Bán</string>
+    <string name="top_product">Top Sản phẩm</string>
+    <string name="suggest_you">Gợi Ý Cho Bạn</string>
+    <string name="phuong_le">Phương Lê</string>
+    <string name="description">description</string>
+    <string name="todo">TODO</string>
+    <string name="ao">Áo</string>
+    <string name="hello">[Hello]</string>
+    <string name="_1700000">1700000</string>
+    <string name="vi_t_nam">Việt nam</string>
+    <string name="b_n_120">Đã bán 120</string>
+    <string name="mutine">MUTINE</string>
+    <string name="xem_shop">Xem shop</string>
+    <string name="_1_700_000">1.700.000</string>
+</resources>

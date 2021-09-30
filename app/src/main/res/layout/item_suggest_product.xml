@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivSuggestProduct"
+            android:layout_width="104dp"
+            android:layout_height="104dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/newproduct"/>
+        <ImageView
+            android:layout_marginTop="5.5dp"
+            android:layout_marginStart="80dp"
+            android:src="@drawable/ic_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_marginStart="18dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvNameSuggestProduct"
+            android:textSize="12sp"
+            android:lineHeight="15px"
+            android:maxLines="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#1A1A1A"
+            android:fontFamily="@font/lexend_medium"
+            tools:ignore="PxUsage,UnusedAttribute" />
+        <TextView
+            android:layout_marginTop="6dp"
+            android:id="@+id/tvPriceSuggestProduct"
+            android:textSize="14sp"
+            android:lineHeight="17.5px"
+            android:text="@string/_1_700_000"
+            android:fontFamily="@font/lexend_bold"
+            android:textColor="#1A1A1A"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="PxUsage,UnusedAttribute" />
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/ic_location"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tvCountrySuggest"
+                android:textSize="10sp"
+                android:layout_gravity="center"
+                android:layout_marginStart="3.46dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lexend_medium"
+                android:textColor="#1A1A1A"
+                android:text="@string/vi_t_nam"
+                tools:ignore="SmallSp" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tvSoldSuggest"
+            android:layout_marginTop="20dp"
+            android:textSize="10sp"
+            android:lineHeight="12.5px"
+            android:text="@string/b_n_120"
+            android:textColor="#9A9A9A"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="PxUsage,SmallSp,UnusedAttribute" />
+    </LinearLayout>
+</LinearLayout>
