@@ -1,5 +1,6 @@
 import com.example.homecommerce.model.ImageAd
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class SystemBannerVoucher(
     @SerializedName("classify")

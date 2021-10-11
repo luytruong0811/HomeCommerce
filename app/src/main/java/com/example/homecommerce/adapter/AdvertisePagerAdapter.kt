@@ -13,6 +13,7 @@ class AdvertisePagerAdapter : PagerAdapter() {
     private val images = mutableListOf<String>()
 
     fun setAdvertisePager(listAd: List<String>) {
+        this.images.clear()
         this.images.addAll(listAd)
         notifyDataSetChanged()
     }

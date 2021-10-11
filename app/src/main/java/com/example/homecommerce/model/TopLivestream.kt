@@ -2,6 +2,7 @@ package com.example.homecommerce.model
 
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class TopLivestream(
     @SerializedName("_id")
@@ -14,5 +15,4 @@ data class TopLivestream(
     val homes: List<HomeX>,
     @SerializedName("user")
     val user: User,
-
-    )
+)

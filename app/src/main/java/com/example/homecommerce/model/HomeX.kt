@@ -3,6 +3,7 @@ package com.example.homecommerce.model
 
 import OptionType
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class HomeX(
     @SerializedName("allow_refund")

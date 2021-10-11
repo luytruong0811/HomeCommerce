@@ -19,4 +19,11 @@
     <string name="_1_700_000">1.700.000</string>
     <string name="discount">20%</string>
     <string name="_20">20%</string>
+    <string name="s_follow">%s Theo dõi</string>
+    <string name="view_succinct">Rút gọn</string>
+    <string name="see_all">Xem tất cả</string>
+    <string name="text_new">New</string>
+    <string name="s_follow_count">%s lượt theo dõi</string>
+    <string name="liked">Đã thích</string>
+    <string name="unliked">Bỏ thích</string>
 </resources>

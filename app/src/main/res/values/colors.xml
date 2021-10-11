@@ -15,4 +15,12 @@
     <color name="unselected">#262E2A2A</color>
     <color name="nameProduct">#1A1A1A</color>
     <color name="seller">#9A9A9A</color>
+    <color name="colorGrayCod">#1A1A1A</color>
+    <color name="colorGraySeashell">#F1F1F1</color>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorGray">#55A1A9AC</color>
+    <color name="colorAccent">#000000</color>
+    <color name="colorGraySilver">#BEBEBE</color>
+    <color name="colorGrayDusty">#9A9A9A</color>
+    <color name="staticColorBlack">#000000</color>
 </resources>

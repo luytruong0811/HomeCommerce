@@ -10,7 +10,8 @@ import com.example.homecommerce.R
 
 class VoucherPagerAdapter : PagerAdapter() {
     private val items = mutableListOf<String>()
-    fun getVoucher(items: List<String>){
+    fun setVoucher(items: List<String>){
+        this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
     }

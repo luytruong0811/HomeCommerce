@@ -1,4 +1,4 @@
-package com.example.homebidu.adapter
+package com.example.homecommerce.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,56 +7,102 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.homecommerce.R
+import com.example.homecommerce.ext.imageDrawable
+import com.example.homecommerce.ext.setOnDelayClickListener
+import com.example.homecommerce.ext.toPx
 import com.example.homecommerce.model.SuggestProduct
+import com.example.homecommerce.model.SuggestProductModel
+import com.example.homecommerce.model.TopProduct
+import kotlinx.android.synthetic.main.item_product.view.*
 import kotlinx.android.synthetic.main.item_suggest_product.view.*
+import kotlinx.android.synthetic.main.item_top_product.view.*
 import java.text.DecimalFormat
 
-class SuggestProductAdapter : RecyclerView.Adapter<SuggestProductAdapter.ItemSuggestProduct>() {
+class SuggestProductAdapter (
+    private val onItemClickListener: (SuggestProduct) -> Unit,
+    private val onBookmarkClickListener: (SuggestProduct) -> Unit
+    ) : RecyclerView.Adapter<SuggestProductAdapter.ItemSuggestProduct>() {
 
     private val items = mutableListOf<SuggestProduct>()
 
-    fun getSuggestProduct(items: List<SuggestProduct>){
+    fun setSuggestProduct(items: List<SuggestProduct>){
+        this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
     }
 
-    class ItemSuggestProduct(view: View) : RecyclerView.ViewHolder(view){
+    fun findPositionAndUpdateItem(product: SuggestProduct): Int {
+        var position = -1
+        items.forEachIndexed { i, p ->
+            if (p.id == product.id) {
+                p.isBookmarked = product.isBookmarked
+                position = i
+                return@forEachIndexed
+            }
+        }
+        return position
+    }
+
+    class ItemSuggestProduct(
+        view: View,
+        private  val onItemClickListener: (SuggestProduct) -> Unit,
+        private  val onBookmarkClickListener: (SuggestProduct) -> Unit
+    ) : RecyclerView.ViewHolder(view){
         @SuppressLint("SetTextI18n")
         fun bind(data: SuggestProduct){
+            val suggestProductModel = SuggestProductModel(data)
             itemView.apply {
-                Glide.with(ivSuggestProduct)
+                Glide.with(ivProductImage)
                     .load(data.images.firstOrNull())
                     .error(R.mipmap.ic_launcher)
-                    .into(ivSuggestProduct)
+                    .into(ivProductImage)
 
-                tvNameSuggestProduct.text = data.name
+                tvProductName.text = data.name
                 val decimalFormat =  DecimalFormat("###,###,###")
-                tvPriceSuggestProduct.text = decimalFormat.format(data.priceMinMax.max).plus(" ₫")
+                tvProductPrice.text = decimalFormat.format(data.priceMinMax.max).plus(" ₫")
                 if (data.shop.country == "VN"){
-                    tvCountrySuggest.text = "Việt Nam"
+                    tvProductLocation.text = "Việt Nam"
                 }
                 else if (data.shop.country == "KO"){
-                    tvCountrySuggest.text = "Hàn Quốc"
+                    tvProductLocation.text = "Hàn Quốc"
                 }
                 else {
-                    tvCountrySuggest.text = "Mỹ"
+                    tvProductLocation.text = "Mỹ"
                 }
 
-                tvSoldSuggest.text = "Đã bán "+data.sold
+                tvProductSold.text = "Đã bán "+data.sold
 
                 if(data.discountPercent==0) {
-                    tvDisCountSuggest.visibility = View.GONE
+                    tvLabelDiscount.visibility = View.GONE
                 } else {
-                    tvDisCountSuggest.text = data.discountPercent.toString()+"%"
+                    tvLabelDiscount.text = data.discountPercent.toString()+"%"
                 }
+                tvLabelNew.visibility = View.GONE
 
+                updateBookmarkState(suggestProductModel.getBookmarkedState())
+
+                ivBookmarkProduct.setOnDelayClickListener {
+                    onBookmarkClickListener.invoke(data)
+                }
+                setOnDelayClickListener {
+                    onItemClickListener.invoke(data)
+                }
+            }
+        }
+        fun updateBookmarkState(isFavorite: Boolean) {
+            with(itemView) {
+                ivBookmarkProduct.imageDrawable(
+                    if (isFavorite) R.drawable.ic_bookmark_product else R.drawable.ic_unbookmark_product
+                )
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemSuggestProduct {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_suggest_product, parent, false)
-        return ItemSuggestProduct(view)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false)
+        view.layoutParams = ViewGroup.LayoutParams(166f.toPx(parent.context), ViewGroup.LayoutParams.WRAP_CONTENT)
+        view.setPadding(5f.toPx(parent.context), 0f.toPx(parent.context), 5f.toPx(parent.context), 20f.toPx(parent.context))
+        return ItemSuggestProduct(view, onItemClickListener, onBookmarkClickListener)
     }
 
     override fun onBindViewHolder(holder: ItemSuggestProduct, position: Int) {

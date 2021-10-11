@@ -34,19 +34,21 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/circleAvatarSeller"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/avt"/>
+                    android:src="@drawable/avt" />
+
                 <ImageView
                     android:id="@+id/ivTopSeller"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginStart="25dp"
-                    android:src="@drawable/ic_diamond"/>
+                    android:src="@drawable/ic_diamond" />
             </RelativeLayout>
         </LinearLayout>
 

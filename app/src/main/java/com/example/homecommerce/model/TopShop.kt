@@ -12,5 +12,4 @@ data class TopShop(
     val shop: ShopXXX,
     @SerializedName("totalRevenue")
     val totalRevenue: Int
-
 )

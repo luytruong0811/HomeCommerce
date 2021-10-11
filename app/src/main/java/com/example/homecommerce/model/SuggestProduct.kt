@@ -1,6 +1,7 @@
 package com.example.homecommerce.model
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class SuggestProduct(
     @SerializedName("allow_refund")
@@ -44,7 +45,7 @@ data class SuggestProduct(
     @SerializedName("is_approved")
     val isApproved: String,
     @SerializedName("is_bookmarked")
-    val isBookmarked: Boolean,
+    var isBookmarked: Boolean,
     @SerializedName("is_pre_order")
     val isPreOrder: Boolean,
     @SerializedName("length")

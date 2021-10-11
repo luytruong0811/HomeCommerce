@@ -2,6 +2,7 @@ package com.example.homecommerce.model
 
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class VariantX(
     @SerializedName("before_sale_price")

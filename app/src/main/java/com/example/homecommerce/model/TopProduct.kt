@@ -2,6 +2,7 @@ package com.example.homecommerce.model
 
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class TopProduct(
     @SerializedName("before_sale_price")
@@ -11,7 +12,7 @@ data class TopProduct(
     @SerializedName("images")
     val images: List<String>,
     @SerializedName("is_bookmarked")
-    val isBookmarked: Boolean,
+    var isBookmarked: Boolean,
     @SerializedName("name")
     val name: String,
     @SerializedName("price_min_max")

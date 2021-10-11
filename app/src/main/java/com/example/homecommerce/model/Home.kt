@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Home(
     @SerializedName("data")
-    val data: Data,
+    val homePage: HomePage,
     @SerializedName("message")
     val message: String,
     @SerializedName("success")

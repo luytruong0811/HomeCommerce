@@ -13,7 +13,8 @@ class TopKeyAdapter : RecyclerView.Adapter<TopKeyAdapter.ItemTopKeyVH>()  {
 
     private val items = mutableListOf<TopKeyword>()
 
-    fun getTopKey(items: List<TopKeyword>){
+    fun setTopKey(items: List<TopKeyword>){
+        this.items.clear()
         this.items.addAll(items)
     }
 
