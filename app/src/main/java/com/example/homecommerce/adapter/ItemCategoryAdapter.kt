@@ -9,14 +9,14 @@ import com.example.homecommerce.R
 import com.example.homecommerce.base.BaseAdapter
 import com.example.homecommerce.ext.loadImageUrl
 import com.example.homecommerce.ext.setOnDelayClickListener
-import com.example.homecommerce.model.SystemCategory
+import com.example.homecommerce.model.HomePage
 import kotlinx.android.synthetic.main.item_category.view.*
 
 class ItemCategoryAdapter(
-    private val onItemClickListener: (SystemCategory) -> Unit
+    private val onItemClickListener: (HomePage.SystemCategory) -> Unit
 ) : BaseAdapter<RecyclerView.ViewHolder>() {
 
-    private val items = mutableListOf<SystemCategory>()
+    private val items = mutableListOf<HomePage.SystemCategory>()
     var isExpanded = false
 
     companion object {
@@ -25,7 +25,7 @@ class ItemCategoryAdapter(
         private const val TYPE_VIEW_MORE = 1
     }
 
-    fun setItemCategory(items: List<SystemCategory>) {
+    fun setItemCategory(items: List<HomePage.SystemCategory>) {
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
@@ -104,9 +104,9 @@ class ItemCategoryAdapter(
 
     class ItemCategoryVH(
         view: View,
-        private val onItemClickListener: (SystemCategory) -> Unit
+        private val onItemClickListener: (HomePage.SystemCategory) -> Unit
     ) : RecyclerView.ViewHolder(view) {
-        fun bind(systemCategory: SystemCategory) {
+        fun bind(systemCategory: HomePage.SystemCategory) {
             itemView.apply {
                 ivCategory.loadImageUrl(systemCategory.avatar.orEmpty())
                 tvNameCategory.text = systemCategory.name.orEmpty()

@@ -56,7 +56,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/tvLabelDiscount"
+                android:id="@+id/tvLabelDiscountProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
@@ -72,7 +72,7 @@
                 tools:visibility="visible" />
 
             <TextView
-                android:id="@+id/tvLabelNew"
+                android:id="@+id/tvLabelNewProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/staticColorWhite"
@@ -127,7 +127,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvProductLocation"
+        android:id="@+id/tvProductLocationProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -141,7 +141,7 @@
         tools:text="Hàn Quốc" />
 
     <TextView
-        android:id="@+id/tvProductSold"
+        android:id="@+id/tvProductSoldProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"

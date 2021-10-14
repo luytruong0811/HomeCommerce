@@ -6,28 +6,27 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.homecommerce.R
-import com.example.homecommerce.model.TopKeyword
+import com.example.homecommerce.ext.getDefault
+import com.example.homecommerce.ext.loadImageUrl
+import com.example.homecommerce.model.HomePage
 import kotlinx.android.synthetic.main.item_top_key.view.*
 
 class TopKeyAdapter : RecyclerView.Adapter<TopKeyAdapter.ItemTopKeyVH>()  {
 
-    private val items = mutableListOf<TopKeyword>()
+    private val items = mutableListOf<HomePage.TopKeywordHomePage>()
 
-    fun setTopKey(items: List<TopKeyword>){
+    fun setTopKey(items: List<HomePage.TopKeywordHomePage>){
         this.items.clear()
         this.items.addAll(items)
     }
 
     class ItemTopKeyVH(view : View) : RecyclerView.ViewHolder(view){
-        fun bind(data: TopKeyword){
+        fun bind(data: HomePage.TopKeywordHomePage){
             itemView.apply {
-                Glide.with(ivTopKey)
-                    .load(data.avatar)
-                    .error(R.mipmap.ic_launcher)
-                    .into(ivTopKey)
+                ivTopKey.loadImageUrl(data.avatar.orEmpty())
 
                 tvTopKey.text = data.keyword
-                tvTotalProduct.text = "${data.totalProduct} sản phẩm"
+                tvTotalProduct.text = context.getString(R.string.d_product, data.totalProduct.getDefault())
             }
         }
     }

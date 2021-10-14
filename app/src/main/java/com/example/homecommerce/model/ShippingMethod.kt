@@ -1,23 +1,28 @@
 package com.example.homecommerce.model
 
-
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+/**
+ * Created by pvduc9773 on 4/28/21.
+ */
+@Parcelize
 data class ShippingMethod(
-    @SerializedName("code")
-    val code: String,
+
     @SerializedName("_id")
-    val id: String,
-    @SerializedName("is_active")
-    val isActive: Boolean,
+    var id: String? = null,
+
     @SerializedName("name")
-    val name: String,
+    var name: String? = null,
+
+    @SerializedName("type")
+    var type: String? = null,
+
+    @SerializedName("shipping_fee")
+    var shippingFee: Long? = null,
+
     @SerializedName("name_query")
-    val nameQuery: String,
-    @SerializedName("pick_address")
-    val pickAddress: Any,
-    @SerializedName("shipping_method_id")
-    val shippingMethodId: String,
-    @SerializedName("token")
-    val token: Any
-)
+    var nameQuery: String? = null
+
+) : Parcelable

@@ -7,38 +7,33 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.homecommerce.R
-import com.example.homecommerce.ext.imageDrawable
-import com.example.homecommerce.ext.setOnDelayClickListener
-import com.example.homecommerce.ext.toPx
-import com.example.homecommerce.model.NewestProduct
-import com.example.homecommerce.model.NewestProductModel
-import com.example.homecommerce.model.TopProduct
+import com.example.homecommerce.ext.*
+import com.example.homecommerce.model.Product
+import com.example.homecommerce.model.ProductModel
+import com.example.homecommerce.prefs.UserPref
 import kotlinx.android.synthetic.main.item_home_page_top_product.view.*
 import kotlinx.android.synthetic.main.item_new_product.view.*
 import kotlinx.android.synthetic.main.item_product.view.*
 import kotlinx.android.synthetic.main.item_product.view.ivProductImage
-import kotlinx.android.synthetic.main.item_product.view.tvLabelDiscount
-import kotlinx.android.synthetic.main.item_product.view.tvLabelNew
-import kotlinx.android.synthetic.main.item_product.view.tvProductLocation
 import kotlinx.android.synthetic.main.item_product.view.tvProductName
 import kotlinx.android.synthetic.main.item_product.view.tvProductPrice
-import kotlinx.android.synthetic.main.item_product.view.tvProductSold
 import java.text.DecimalFormat
 
 class NewProductAdapter(
-    private val onItemClickListener: (NewestProduct) -> Unit,
-    private val onBookmarkClickListener: (NewestProduct) -> Unit
+//    private val userPref: UserPref,
+    private val onItemClickListener: (Product) -> Unit,
+    private val onBookmarkClickListener: (Product) -> Unit
 ) : RecyclerView.Adapter<NewProductAdapter.ItemNewProductVH>(){
 
-    private val items = mutableListOf<NewestProduct>()
+    private val items = mutableListOf<Product>()
 
-    fun setNewProduct(items: List<NewestProduct>){
+    fun setNewProduct(items: List<Product>){
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
     }
 
-    fun findPositionAndUpdateItem(product: NewestProduct): Int {
+    fun findPositionAndUpdateItem(product: Product): Int {
         var position = -1
         items.forEachIndexed { i, p ->
             if (p.id == product.id) {
@@ -64,37 +59,39 @@ class NewProductAdapter(
 
     class ItemNewProductVH(
         view : View,
-        private val onItemClickListener: (NewestProduct) -> Unit,
-        private val onBookmarkClickListener: (NewestProduct) -> Unit
+//        private val userPref: UserPref,
+        private val onItemClickListener: (Product) -> Unit,
+        private val onBookmarkClickListener: (Product) -> Unit
     ) : RecyclerView.ViewHolder(view){
         @SuppressLint("SetTextI18n")
-        fun bind(data : NewestProduct){
-            val productModel = NewestProductModel(data)
+        fun bind(data : Product){
+            val productModel = ProductModel(data)
             itemView.apply {
-                Glide.with(ivProductImage)
-                    .load(data.images.firstOrNull())
-                    .error(R.mipmap.ic_launcher)
-                    .into(ivProductImage)
-                tvProductName.text = data.name
-                val decimalFormat =  DecimalFormat("###,###,###")
-                tvProductPrice.text = decimalFormat.format(data.beforeSalePrice).plus(" ₫")
-                if (data.shop.country == "KO"){
-                    tvProductLocation.text = "Hàn Quốc"
-                }else if(data.shop.country == "VN"){
-                    tvProductLocation.text = "Việt Nam"
-                }else{
-                    tvProductLocation.text = "Mỹ"
+                ivProductImage.loadImageUrl(productModel.getImage().orEmpty())
+
+                tvProductName.text = productModel.getName()
+
+                tvProductPrice.text = productModel.getSalePrice()
+
+                tvProductLocationProduct.setVisible(!productModel.getLocation(context).isNullOrEmpty())
+                if (!productModel.getLocation(context).isNullOrEmpty()) {
+                    tvProductLocationProduct.text = productModel.getLocation(context)
                 }
-                tvProductSold.text = "Đã bán "+ data.sold.toString()
-                if(data.discount_percent==0) {
-                    tvLabelDiscount.visibility = View.GONE
-                } else {
-                    tvLabelDiscount.text = data.discount_percent.toString()+"%"
+
+                tvProductSoldProduct.setVisible(productModel.getTotalSold() > 0)
+                if (productModel.getTotalSold() >= 0) {
+                    tvProductSoldProduct.text = context.getString(R.string.sold_s, productModel.getTotalSold().formatToString())
                 }
-                tvLabelNew.visibility = View.GONE
+
+                tvLabelDiscountProduct.setVisible(productModel.isShowDiscountPercent())
+                if (productModel.isShowDiscountPercent()) {
+                    tvLabelDiscountProduct.text = "${productModel.getDiscountPercent()}%"
+                }
+                tvLabelNewProduct.visibility = View.GONE
+
+//                ivBookmarkProduct.setVisible(userPref.getUserInfo()?.shop?.id != data.shopId)
 
                 updateBookmarkState(productModel.getBookmarkedState())
-
                 ivBookmarkProduct.setOnDelayClickListener {
                     onBookmarkClickListener.invoke(data)
                 }

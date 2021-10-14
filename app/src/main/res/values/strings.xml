@@ -26,4 +26,29 @@
     <string name="s_follow_count">%s lượt theo dõi</string>
     <string name="liked">Đã thích</string>
     <string name="unliked">Bỏ thích</string>
+    <string name="today">Hôm nay</string>
+    <string name="vnpay">VNPay</string>
+    <string name="momo">Momo</string>
+    <string name="cash">Tiền mặt</string>
+    <string name="korea">Hàn Quốc</string>
+    <string name="viet_nam">Việt Nam</string>
+    <string name="sold_s">Đã bán %s</string>
+    <string name="d_product">%d sản phẩm</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sex">Giới tính</string>
+    <string name="age">Độ tuổi</string>
+    <string name="size">Kích cỡ</string>
+    <string name="rermission_denied">Truy cập bị từ chối</string>
+    <string name="msg_permission_setting">Vui lòng cho phép BIDU truy cập camera và thư viện hình ảnh để sử dụng trong ứng dụng</string>
+    <string name="msg_permission_setting_negative">Tôi đã hiểu</string>
+    <string name="msg_permission_setting_positive">Cấp quyền</string>
+    <string name="error_code">Lỗi %d</string>
+    <string name="error_server">Không thể kết nối tới máy chủ. Vui lòng thử lại sau.</string>
+    <string name="error_network">Thiết bị của bạn chưa kết nối với internet. Vui lòng kiểm tra và thử lại.</string>
+    <string name="error_authorization">Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.</string>
+    <string name="error_data_io">Đã xảy ra lỗi (IOException). Vui lòng thử lại sau.</string>
+    <string name="error_data">Đã xảy ra lỗi dữ liệu. Vui lòng thử lại sau.</string>
+    <string name="category_not_found_please_again">Không tìm thấy danh mục. Vui lòng thử lại.</string>
+    <string name="o">Áo</string>
 </resources>

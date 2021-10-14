@@ -9,22 +9,36 @@
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable-v24/ic_up_pink.xml" value="0.22870370370370371" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable-v24/tablayout_selected.xml" value="0.21574074074074073" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/background_black_retange.xml" value="0.20185185185185187" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/bg_border_gray_0dp.xml" value="0.21944444444444444" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/custom_avt.xml" value="0.20185185185185187" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/custom_discount.xml" value="0.23333333333333334" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/custom_see_all.xml" value="0.22962962962962963" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/ic_back_gray.xml" value="0.21944444444444444" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/ic_chat_circle.xml" value="0.2222222222222222" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/ic_close_gray_dusty.xml" value="0.21574074074074073" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/ic_down_pink.xml" value="0.2324074074074074" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/ic_home_cart.xml" value="0.2222222222222222" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/ic_home_notification.xml" value="0.2222222222222222" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/ic_home_search.xml" value="0.2222222222222222" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/ic_like.xml" value="0.20185185185185187" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/ic_save.xml" value="0.22962962962962963" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/ic_search_pink.xml" value="0.21944444444444444" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/drawable/ic_unbookmark_product.xml" value="0.2222222222222222" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/activity_main.xml" value="0.23349282296650717" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/activity_product_by_system_category.xml" value="0.24010416666666667" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/activity_view_pager.xml" value="0.25416666666666665" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/dialog_confirm.xml" value="0.25416666666666665" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/dialog_loading.xml" value="0.25416666666666665" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/fragment_first.xml" value="0.25416666666666665" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/fragment_first2.xml" value="0.25416666666666665" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/fragment_product_by_system_category.xml" value="0.25416666666666665" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/fragment_product_by_system_category2.xml" value="0.25416666666666665" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/fragment_second.xml" value="0.25416666666666665" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/fragment_system_category_child.xml" value="0.25416666666666665" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/item_advertise.xml" value="0.25416666666666665" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/item_bidu_live.xml" value="0.536" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/item_category.xml" value="0.25416666666666665" />
-        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/item_home_page_top_product.xml" value="0.2" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/item_home_page_top_product.xml" value="0.312210200927357" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/item_new_product.xml" value="0.536" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/item_product.xml" value="0.25416666666666665" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/item_suggest_product.xml" value="0.4" />
@@ -32,6 +46,7 @@
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/item_top_product.xml" value="0.536" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/item_top_seller.xml" value="0.518918918918919" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/item_voucher.xml" value="0.25416666666666665" />
+        <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/layout/view_custom_tab_layout.xml" value="0.26614583333333336" />
         <entry key="..\:/STDIO/Code/HomeCommerce/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.21574074074074073" />
       </map>
     </option>

@@ -7,31 +7,30 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.homecommerce.R
-import com.example.homecommerce.ext.imageDrawable
-import com.example.homecommerce.ext.setOnDelayClickListener
-import com.example.homecommerce.ext.toPx
-import com.example.homecommerce.model.SuggestProduct
-import com.example.homecommerce.model.SuggestProductModel
-import com.example.homecommerce.model.TopProduct
+import com.example.homecommerce.ext.*
+import com.example.homecommerce.model.Product
+import com.example.homecommerce.model.ProductModel
+import com.example.homecommerce.prefs.UserPref
 import kotlinx.android.synthetic.main.item_product.view.*
 import kotlinx.android.synthetic.main.item_suggest_product.view.*
 import kotlinx.android.synthetic.main.item_top_product.view.*
 import java.text.DecimalFormat
 
 class SuggestProductAdapter (
-    private val onItemClickListener: (SuggestProduct) -> Unit,
-    private val onBookmarkClickListener: (SuggestProduct) -> Unit
+//    private val userPref: UserPref,
+    private val onItemClickListener: (Product) -> Unit,
+    private val onBookmarkClickListener: (Product) -> Unit
     ) : RecyclerView.Adapter<SuggestProductAdapter.ItemSuggestProduct>() {
 
-    private val items = mutableListOf<SuggestProduct>()
+    private val items = mutableListOf<Product>()
 
-    fun setSuggestProduct(items: List<SuggestProduct>){
+    fun setSuggestProduct(items: List<Product>){
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
     }
 
-    fun findPositionAndUpdateItem(product: SuggestProduct): Int {
+    fun findPositionAndUpdateItem(product: Product): Int {
         var position = -1
         items.forEachIndexed { i, p ->
             if (p.id == product.id) {
@@ -45,41 +44,36 @@ class SuggestProductAdapter (
 
     class ItemSuggestProduct(
         view: View,
-        private  val onItemClickListener: (SuggestProduct) -> Unit,
-        private  val onBookmarkClickListener: (SuggestProduct) -> Unit
+//        private val userPref: UserPref,
+        private  val onItemClickListener: (Product) -> Unit,
+        private  val onBookmarkClickListener: (Product) -> Unit
     ) : RecyclerView.ViewHolder(view){
         @SuppressLint("SetTextI18n")
-        fun bind(data: SuggestProduct){
-            val suggestProductModel = SuggestProductModel(data)
+        fun bind(data: Product){
+            val productModel = ProductModel(data)
             itemView.apply {
-                Glide.with(ivProductImage)
-                    .load(data.images.firstOrNull())
-                    .error(R.mipmap.ic_launcher)
-                    .into(ivProductImage)
 
-                tvProductName.text = data.name
-                val decimalFormat =  DecimalFormat("###,###,###")
-                tvProductPrice.text = decimalFormat.format(data.priceMinMax.max).plus(" ₫")
-                if (data.shop.country == "VN"){
-                    tvProductLocation.text = "Việt Nam"
-                }
-                else if (data.shop.country == "KO"){
-                    tvProductLocation.text = "Hàn Quốc"
-                }
-                else {
-                    tvProductLocation.text = "Mỹ"
+                ivProductImage.loadImageUrl(productModel.getImage().orEmpty())
+
+                tvProductName.text = productModel.getName()
+
+                tvProductPrice.text = productModel.getSalePrice()
+
+                tvProductLocationProduct.text = productModel.getLocation(context)
+
+                tvProductSoldProduct.setVisible(productModel.getTotalSold() > 0)
+                if (productModel.getTotalSold() >= 0) {
+                    tvProductSoldProduct.text = context.getString(R.string.sold_s, productModel.getTotalSold().formatToString())
                 }
 
-                tvProductSold.text = "Đã bán "+data.sold
-
-                if(data.discountPercent==0) {
-                    tvLabelDiscount.visibility = View.GONE
-                } else {
-                    tvLabelDiscount.text = data.discountPercent.toString()+"%"
+                tvLabelDiscountProduct.setVisible(productModel.isShowDiscountPercent())
+                if (productModel.isShowDiscountPercent()) {
+                    tvLabelDiscountProduct.text = "${productModel.getDiscountPercent()}%"
                 }
-                tvLabelNew.visibility = View.GONE
 
-                updateBookmarkState(suggestProductModel.getBookmarkedState())
+                tvLabelNewProduct.visibility = View.GONE
+
+                updateBookmarkState(productModel.getBookmarkedState())
 
                 ivBookmarkProduct.setOnDelayClickListener {
                     onBookmarkClickListener.invoke(data)

@@ -4,6 +4,9 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Created by pvduc9773 on 2/20/21.
+ */
 @Parcelize
 data class Category(
 
@@ -39,6 +42,9 @@ data class Category(
 
     @SerializedName("updated_at")
     var updatedAt: String? = null,
+
+    @SerializedName("products")
+    var products: List<Product>? = null,
 
     @SerializedName("product_numbers")
     var productNumbers: Int? = null

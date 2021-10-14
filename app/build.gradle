@@ -92,6 +92,8 @@ dependencies {
 
     implementation 'me.relex:circleindicator:2.1.6'
 
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
 
 }
 kapt {

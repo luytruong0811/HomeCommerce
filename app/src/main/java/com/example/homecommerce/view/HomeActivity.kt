@@ -1,16 +1,12 @@
 package com.example.homecommerce.view
 
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.WindowManager
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,18 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.homecommerce.R
 import com.example.homecommerce.adapter.*
 import com.example.homecommerce.ext.*
-import com.example.homecommerce.model.HomePage
-import com.example.homecommerce.model.NewestProduct
-import com.example.homecommerce.model.SuggestProduct
+import com.example.homecommerce.systemcategory.ProductBySystemCategoryActivity
 import com.example.homecommerce.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.item_top_seller.view.*
 import java.util.*
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity ()  {
     private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var advertisePagerAdapter: AdvertisePagerAdapter
     private lateinit var voucherPagerAdapter: VoucherPagerAdapter
@@ -47,13 +39,10 @@ class HomeActivity : AppCompatActivity() {
     private var totalAd = 0
     private var totalVoucher = 0
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // FIXME: 11/10/2021 initView, initEvents
         initView()
         initEvents()
         evenListenObs()
@@ -74,44 +63,43 @@ class HomeActivity : AppCompatActivity() {
 
 
     private fun evenListenObs() {
-        homeViewModel.home.observe(this, { t ->
+        homeViewModel.getHomePageObs.observe(this, { t ->
             when (t) {
-                is HomeViewModel.HomeState.Loading -> {
+                is HomeViewModel.GetHomePageState.Loading -> {
                 }
-                is HomeViewModel.HomeState.Success -> {
+                is HomeViewModel.GetHomePageState.Success -> {
                     //banner
                     val banners =
-                        t.items.systemBanner?.map { it.imageAds.firstOrNull { it.lang == "vi" }?.detail.orEmpty() }
+                        t.homePage.systemBanner?.map { it.images?.firstOrNull { it.lang == "vi" }?.detail.orEmpty() }
                     advertisePagerAdapter.setAdvertisePager(banners.orEmpty())
                     totalAd = banners?.size?:0
 
                     //category
-                    itemCategoryAdapter.setItemCategory(t.items.systemCategory.orEmpty())
+                    itemCategoryAdapter.setItemCategory(t.homePage.systemCategory.orEmpty())
 
                     //banner
                     val voucherBanners =
-                        t.items.systemBannerVoucher?.map { it.images.firstOrNull { it.lang == "vi" }?.detail.orEmpty() }
+                        t.homePage.systemBannerVoucher?.map { it.images?.firstOrNull { it.lang == "vi" }?.detail.orEmpty() }
                     voucherPagerAdapter.setVoucher(voucherBanners.orEmpty())
                     totalVoucher = voucherBanners?.size?:0
 
                     //newProduct
-                    newProductAdapter.setNewProduct(t.items.newestProduct.orEmpty())
+                    newProductAdapter.setNewProduct(t.homePage.newestProduct.orEmpty())
 
                     //topKey
-                    topKeyAdapter.setTopKey(t.items.topKeyword.orEmpty())
+                    topKeyAdapter.setTopKey(t.homePage.topKeyword.orEmpty())
 
                     //topSeller
-                    //displayTopShop(t.items.topShop)
-                    topSellerAdapter.setTopSeller(t.items.topShop.orEmpty())
+                    topSellerAdapter.setTopSeller(t.homePage.topShop.orEmpty())
 
                     //topProduct
-                    topProductAdapter.setTopProduct(t.items.topProduct.orEmpty())
+                    topProductAdapter.setTopProduct(t.homePage.topProduct.orEmpty())
 
                     //suggestProduct
-                    suggestProductAdapter.setSuggestProduct(t.items.suggestProduct.orEmpty())
+                    suggestProductAdapter.setSuggestProduct(t.homePage.suggestProduct.orEmpty())
 
                 }
-                is HomeViewModel.HomeState.Error -> Toast.makeText(
+                is HomeViewModel.GetHomePageState.Failed -> Toast.makeText(
                     this,
                     t.message,
                     Toast.LENGTH_SHORT
@@ -119,16 +107,16 @@ class HomeActivity : AppCompatActivity() {
             }
         })
 
-        homeViewModel.bookmarkTopProductObs.observe(this, { t->
+        homeViewModel.bookmarkProductObs.observe(this, { t->
             when (t) {
-                is HomeViewModel.BookmarkTopProductState.Loading -> {
+                is HomeViewModel.BookmarkProductState.Loading -> {
                 }
-                is HomeViewModel.BookmarkTopProductState.Success -> {
+                is HomeViewModel.BookmarkProductState.Success -> {
                     Toast.makeText(
                         this,
-                        if (t.topProduct?.isBookmarked == true) getString(R.string.liked) else getString(R.string.unliked),
+                        if (t.product?.isBookmarked == true) getString(R.string.liked) else getString(R.string.unliked),
                         Toast.LENGTH_SHORT).show()
-                    t.topProduct?.let { product ->
+                    t.product?.let { product ->
                         val position = topProductAdapter.findPositionAndUpdateItem(product)
                         if (position != -1) {
                             rvTopProduct.findViewHolderForAdapterPosition(position)?.let { holder ->
@@ -140,26 +128,27 @@ class HomeActivity : AppCompatActivity() {
                             } ?:kotlin.run {
                                 topProductAdapter.notifyItemChanged(position)
                             }
+
                         }
                     }
                 }
-                is HomeViewModel.BookmarkTopProductState.Failed -> {
+                is HomeViewModel.BookmarkProductState.Failed -> {
                     Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
                 }
             }
         })
 
-        homeViewModel.bookmarkNewestProductObs.observe(this, { t->
+        homeViewModel.bookmarkProductObs.observe(this, { t->
             when (t) {
-                is HomeViewModel.BookmarkNewestProductState.Loading -> {
+                is HomeViewModel.BookmarkProductState.Loading -> {
                 }
-                is HomeViewModel.BookmarkNewestProductState.Success -> {
+                is HomeViewModel.BookmarkProductState.Success -> {
                     Toast.makeText(
                         this,
-                        if (t.newestProduct?.isBookmarked == true) getString(R.string.liked) else getString(R.string.unliked),
+                        if (t.product?.isBookmarked == true) getString(R.string.liked) else getString(R.string.unliked),
                         Toast.LENGTH_SHORT).show()
-                    t.newestProduct?.let { product ->
-                        val position = newProductAdapter.findPositionAndUpdateBookmarked(product.id.orEmpty(), t.newestProduct.isBookmarked)
+                    t.product?.let { product ->
+                        val position = newProductAdapter.findPositionAndUpdateBookmarked(product.id.orEmpty(), t.product.isBookmarked)
                         if (position != -1) {
                             rvNewProduct.findViewHolderForAdapterPosition(position)?.let { holder ->
                                 when (holder) {
@@ -173,22 +162,22 @@ class HomeActivity : AppCompatActivity() {
                         }
                     }
                 }
-                is HomeViewModel.BookmarkNewestProductState.Failed -> {
+                is HomeViewModel.BookmarkProductState.Failed -> {
                     Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
                 }
             }
         })
 
-        homeViewModel.bookmarkSuggestProductState.observe(this, { t->
+        homeViewModel.bookmarkProductObs.observe(this, { t->
             when (t) {
-                is HomeViewModel.BookmarkSuggestProductState.Loading -> {
+                is HomeViewModel.BookmarkProductState.Loading -> {
                 }
-                is HomeViewModel.BookmarkSuggestProductState.Success -> {
+                is HomeViewModel.BookmarkProductState.Success -> {
                     Toast.makeText(
                         this,
-                        if (t.suggestProduct?.isBookmarked == true) getString(R.string.liked) else getString(R.string.unliked),
+                        if (t.product?.isBookmarked == true) getString(R.string.liked) else getString(R.string.unliked),
                         Toast.LENGTH_SHORT).show()
-                    t.suggestProduct?.let { product ->
+                    t.product?.let { product ->
                         val position = suggestProductAdapter.findPositionAndUpdateItem(product)
                         if (position != -1) {
                             rvSuggest.findViewHolderForAdapterPosition(position)?.let { holder ->
@@ -203,7 +192,7 @@ class HomeActivity : AppCompatActivity() {
                         }
                     }
                 }
-                is HomeViewModel.BookmarkSuggestProductState.Failed -> {
+                is HomeViewModel.BookmarkProductState.Failed -> {
                     Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -211,8 +200,16 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        itemCategoryAdapter = ItemCategoryAdapter(onItemClickListener = {
-            Toast.makeText(this, "Click item", Toast.LENGTH_SHORT).show()
+        itemCategoryAdapter = ItemCategoryAdapter(
+            onItemClickListener = {
+                startActivity(intent)
+                val intent = Intent(this, ProductBySystemCategoryActivity::class.java)
+                intent.apply {
+                    putExtra(ProductBySystemCategoryActivity.EXTRA_CATEGORY_ID, it.id)
+                    putExtra(ProductBySystemCategoryActivity.EXTRA_CATEGORY_NAME, it.name.orEmpty())
+                }
+                startActivity(intent)
+
         })
         gridLayout = GridLayoutManager(this, 5)
         rvCategory.apply {
@@ -234,7 +231,7 @@ class HomeActivity : AppCompatActivity() {
 
             },
             onBookmarkClickListener = {
-                homeViewModel.requestBookmarkNewestProduct(it)
+                homeViewModel.requestBookmarkProduct(it)
             }
         )
         val layoutManagerNewProduct = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
@@ -265,7 +262,7 @@ class HomeActivity : AppCompatActivity() {
 
             }
             , onBookmarkClickListener = {
-                homeViewModel.requestBookmarkTopProduct(it)
+                homeViewModel.requestBookmarkProduct(it)
             })
         val layoutManagerTopProduct = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         rvTopProduct.apply {
@@ -278,7 +275,7 @@ class HomeActivity : AppCompatActivity() {
 
             },
             onBookmarkClickListener = {
-                homeViewModel.requestBookmarkSuggestProduct(it)
+                homeViewModel.requestBookmarkProduct(it)
             }
         )
         val layoutManagerSuggestProduct = GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)

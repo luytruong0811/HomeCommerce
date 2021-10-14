@@ -24,6 +24,18 @@ fun Int?.getDefault(): Int {
     return this ?: 0
 }
 
+fun String?.getDefault(): String {
+    return this ?: ""
+}
+
+fun Long?.getDefaultToString(): String {
+    return this?.toString() ?: ""
+}
+
+fun Long?.getDefault(): Long {
+    return this ?: 0L
+}
+
 fun Int.formatToString(): String {
     return if (this < 10000) {
         "$this"
